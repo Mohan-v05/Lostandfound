@@ -1,100 +1,264 @@
-// UWU FindIt - Basic JavaScript Logic for University Project
-
-// Global key for local storage
+// ============================================================
+// Supabase Setup
+// ============================================================
+const SUPABASE_URL = "https://uokbjqdebdcdpghsyvru.supabase.co";
+const SUPABASE_KEY = "sb_publishable_Nj6HePujmihScy5vXXpKVg_9AYGChI6";
+const supabaseClient = window.supabase
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+    : null;
+console.log(typeof window.supabase, supabaseClient);
+// Local storage keys (used only as an offline cache / fallback)
 var STORAGE_KEY = 'uwu_findit_items';
 var AUTH_KEY = 'uwu_findit_admin_auth';
 
-// Hardcoded Admin Credentials
+// Hardcoded Admin Credentials (NOTE: for a real app, move auth server-side)
 var ADMIN_CREDENTIALS = {
     username: 'admin',
     password: 'admin123'
 };
 
-// Function to get items from local storage
-function getItems() {
-    var data = localStorage.getItem(STORAGE_KEY);
-    var items = [];
-
-    if (data) {
-        items = JSON.parse(data);
+// ============================================================
+// Mapping helpers (DB row <-> app item shape)
+// ============================================================
+function normalizeItemForSupabase(item) {
+    var row = {
+        item_name: item.itemName || item.item_name || '',
+        category: item.category || '',
+        location: item.location || '',
+        date: item.date || '',
+        description: item.description || '',
+        contact: item.contact || '',
+        status: item.status || 'lost',
+        image_url: item.recoveredImage || item.image_url || null
+    };
+    // Only include id/created_at if they already exist (updates/upserts)
+    if (item.id) row.id = item.id;
+    if (item.createdAt || item.created_at) {
+        row.created_at = item.createdAt || item.created_at;
     }
-
-    // Add demo data if the system is empty for the first time
-    if (items.length === 0) {
-        var demoData = [
-            {
-                id: '101',
-                itemName: 'Student ID Card',
-                category: 'Documents',
-                location: 'Main Library',
-                date: '2024-01-18',
-                description: 'Blue lanyard, CST department.',
-                contact: '0712345678',
-                status: 'found',
-                createdAt: new Date().toISOString()
-            },
-            {
-                id: '102',
-                itemName: 'Casio Calculator',
-                category: 'Electronics',
-                location: 'Lecture Hall 05',
-                date: '2024-01-19',
-                description: 'Black color, fx-991ES Plus.',
-                contact: '0778899001',
-                status: 'lost',
-                createdAt: new Date().toISOString()
-            }
-        ];
-        saveItems(demoData);
-        return demoData;
-    }
-    return items;
+    return row;
 }
 
-// Function to save items to local storage
+function mapSupabaseRow(row) {
+    return {
+        id: row.id,
+        itemName: row.item_name || row.itemName || '',
+        category: row.category || '',
+        location: row.location || '',
+        date: row.date || '',
+        description: row.description || '',
+        contact: row.contact || '',
+        status: row.status || 'lost',
+        createdAt: row.created_at || row.createdAt || new Date().toISOString(),
+        recoveredImage: row.image_url || row.recoveredImage || null
+    };
+}
+
+// ============================================================
+// Supabase CRUD
+// ============================================================
+async function getItemsFromSupabase() {
+    if (!supabaseClient) return [];
+
+    var res = await supabaseClient
+        .from('items')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+    if (res.error) {
+        console.error('Error loading items:', res.error);
+        return [];
+    }
+    return res.data.map(mapSupabaseRow);
+}
+
+async function addItemToSupabase(item) {
+    if (!supabaseClient) return null;
+
+    var res = await supabaseClient
+        .from('items')
+        .insert([normalizeItemForSupabase(item)])
+        .select()
+        .single();
+
+    if (res.error) {
+        console.error('Error adding item:', res.error);
+        return null;
+    }
+    return mapSupabaseRow(res.data);
+}
+
+async function updateItemInSupabase(id, changes) {
+    if (!supabaseClient) return null;
+
+    var res = await supabaseClient
+        .from('items')
+        .update(normalizeItemForSupabase(changes))
+        .eq('id', id)
+        .select()
+        .single();
+
+    if (res.error) {
+        console.error('Error updating item:', res.error);
+        return null;
+    }
+    return mapSupabaseRow(res.data);
+}
+
+async function deleteItemFromSupabase(id) {
+    if (!supabaseClient) return false;
+
+    var res = await supabaseClient
+        .from('items')
+        .delete()
+        .eq('id', id);
+
+    if (res.error) {
+        console.error('Error deleting item:', res.error);
+        return false;
+    }
+    return true;
+}
+
+async function getItemByIdFromSupabase(id) {
+    if (!supabaseClient) return null;
+
+    var res = await supabaseClient
+        .from('items')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+    if (res.error) {
+        console.error('Error getting item:', res.error);
+        return null;
+    }
+    return mapSupabaseRow(res.data);
+}
+
+async function testSupabase() {
+    if (!supabaseClient) {
+        console.warn('Supabase client is not available yet.');
+        return;
+    }
+
+    var res = await supabaseClient.from('items').select('*').limit(5);
+
+    if (res.error) {
+        console.error('Supabase connection failed:', res.error);
+    } else {
+        console.log('Supabase connected successfully!');
+        console.log(res.data);
+    }
+}
+
+// ============================================================
+// Local storage cache (fallback only — used if Supabase is
+// unavailable, and kept in sync after every Supabase call)
+// ============================================================
 function saveItems(items) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
 }
 
-// Function to add a new item
-function addItem(item) {
-    var items = getItems();
-    var newItem = item;
-    newItem.id = 'ITEM-' + Date.now();
-    newItem.createdAt = new Date().toISOString();
-
-    // Put new item at the top
-    var newArray = [newItem];
-    for (var i = 0; i < items.length; i++) {
-        newArray.push(items[i]);
+function getCachedItems() {
+    var data = localStorage.getItem(STORAGE_KEY);
+    if (!data) return [];
+    try {
+        return JSON.parse(data);
+    } catch (e) {
+        return [];
     }
-
-    saveItems(newArray);
-    return newItem;
 }
 
-// Function to delete an item
-function deleteItem(id) {
-    var items = getItems();
-    var filteredItems = [];
-    for (var i = 0; i < items.length; i++) {
-        if (items[i].id !== id) {
-            filteredItems.push(items[i]);
+// ============================================================
+// Unified data access — tries Supabase first, falls back to cache
+// ============================================================
+async function getItems() {
+    if (supabaseClient) {
+        var items = await getItemsFromSupabase();
+        if (items.length > 0) {
+            saveItems(items);
+            return items;
+        }
+        // Supabase reachable but empty (or errored) — fall back to cache
+        return getCachedItems();
+    }
+    return getCachedItems();
+}
+
+async function getItemById(id) {
+    if (supabaseClient) {
+        var item = await getItemByIdFromSupabase(id);
+        if (item) return item;
+    }
+    var cached = getCachedItems();
+    for (var i = 0; i < cached.length; i++) {
+        if (cached[i].id === id) return cached[i];
+    }
+    return null;
+}
+
+async function addItem(item) {
+    if (supabaseClient) {
+        var created = await addItemToSupabase(item);
+        if (created) {
+            var items = await getItems();
+            return created;
         }
     }
-    saveItems(filteredItems);
+    // Fallback: local-only item
+    var localItem = item;
+    localItem.id = 'ITEM-' + Date.now();
+    localItem.createdAt = new Date().toISOString();
+    var cached = getCachedItems();
+    cached.unshift(localItem);
+    saveItems(cached);
+    return localItem;
 }
 
+async function deleteItem(id) {
+    if (supabaseClient) {
+        await deleteItemFromSupabase(id);
+    }
+    var cached = getCachedItems();
+    var filtered = [];
+    for (var i = 0; i < cached.length; i++) {
+        if (cached[i].id !== id) filtered.push(cached[i]);
+    }
+    saveItems(filtered);
+}
+
+async function markItemRecovered(id, recoveredImage) {
+    var changes = { status: 'recovered', recoveredImage: recoveredImage };
+
+    if (supabaseClient) {
+        var updated = await updateItemInSupabase(id, changes);
+        if (updated) return updated;
+    }
+
+    // Fallback: update cache only
+    var cached = getCachedItems();
+    for (var i = 0; i < cached.length; i++) {
+        if (cached[i].id === id) {
+            cached[i].status = 'recovered';
+            cached[i].recoveredImage = recoveredImage;
+            break;
+        }
+    }
+    saveItems(cached);
+    return null;
+}
+
+// ============================================================
 // Page Load Initialization
+// ============================================================
 window.onload = function () {
     initApp();
 };
 
-function initApp() {
+async function initApp() {
     console.log('System Initialized');
-
-    // Check which page we are on and call the right function
-    var path = window.location.pathname;
+    await testSupabase();
 
     if (document.getElementById('recent-items-container')) {
         renderRecentItems();
@@ -151,8 +315,10 @@ function initApp() {
     }
 }
 
+// ============================================================
 // Form logic
-function handleFormSubmit(e, type) {
+// ============================================================
+async function handleFormSubmit(e, type) {
     e.preventDefault();
     var form = e.target;
 
@@ -166,12 +332,14 @@ function handleFormSubmit(e, type) {
         status: type
     };
 
-    addItem(itemData);
+    await addItem(itemData);
     alert('Report submitted successfully!');
     window.location.href = 'items.html';
 }
 
+// ============================================================
 // UI Rendering Functions
+// ============================================================
 function createItemCard(item) {
     var card = document.createElement('div');
     card.className = 'item-card';
@@ -191,12 +359,11 @@ function createItemCard(item) {
     return card;
 }
 
-function renderRecentItems() {
+async function renderRecentItems() {
     var container = document.getElementById('recent-items-container');
-    var items = getItems();
+    var items = await getItems();
     container.innerHTML = '';
 
-    // Show only first 4
     var limit = items.length;
     if (limit > 4) limit = 4;
 
@@ -205,9 +372,9 @@ function renderRecentItems() {
     }
 }
 
-function renderAllItems() {
+async function renderAllItems() {
     var container = document.getElementById('all-items-container');
-    var items = getItems();
+    var items = await getItems();
     container.innerHTML = '';
 
     for (var i = 0; i < items.length; i++) {
@@ -215,20 +382,22 @@ function renderAllItems() {
     }
 }
 
+// ============================================================
 // Search Functionality
-function initSearch() {
+// ============================================================
+async function initSearch() {
     var searchInput = document.getElementById('search-input');
     var categoryFilter = document.getElementById('category-filter');
     var locationFilter = document.getElementById('location-filter');
+
+    var allItems = await getItems(); // fetch once, filter client-side
 
     function runSearch() {
         var query = searchInput.value.toLowerCase();
         var cat = categoryFilter.value;
         var loc = locationFilter.value;
 
-        var allItems = getItems();
         var results = [];
-
         for (var i = 0; i < allItems.length; i++) {
             var item = allItems[i];
             var matchesQuery = item.itemName.toLowerCase().indexOf(query) !== -1;
@@ -254,21 +423,15 @@ function initSearch() {
     runSearch(); // Initial run
 }
 
+// ============================================================
 // Details Page
-function renderItemDetails() {
+// ============================================================
+async function renderItemDetails() {
     var container = document.getElementById('item-details-container');
     var params = new URLSearchParams(window.location.search);
     var id = params.get('id');
 
-    var items = getItems();
-    var item = null;
-
-    for (var i = 0; i < items.length; i++) {
-        if (items[i].id === id) {
-            item = items[i];
-            break;
-        }
-    }
+    var item = await getItemById(id);
 
     if (!item) {
         container.innerHTML = '<h2>Item Not Found</h2>';
@@ -284,7 +447,6 @@ function renderItemDetails() {
     html += '<p><strong>Contact:</strong> ' + item.contact + '</p>';
     html += '<p><strong>Description:</strong> ' + item.description + '</p>';
 
-    // Recovery Proof UI
     if (item.status === 'recovered') {
         html += '<div style="margin-top: 20px;"><h3>Recovery Proof</h3>';
         if (item.recoveredImage) {
@@ -316,17 +478,9 @@ window.showUploadUI = function (id) {
 
 window.saveRecovery = function (id) {
     var fileInput = document.getElementById('fileInput');
-    var items = getItems();
 
-    function update(imgBase64) {
-        for (var i = 0; i < items.length; i++) {
-            if (items[i].id === id) {
-                items[i].status = 'recovered';
-                items[i].recoveredImage = imgBase64;
-                break;
-            }
-        }
-        saveItems(items);
+    async function update(imgBase64) {
+        await markItemRecovered(id, imgBase64);
         alert('Item marked as recovered!');
         location.reload();
     }
@@ -342,10 +496,12 @@ window.saveRecovery = function (id) {
     }
 };
 
+// ============================================================
 // Admin Dashboard
-function renderAdminDashboard() {
+// ============================================================
+async function renderAdminDashboard() {
     var tableBody = document.querySelector('#admin-items-table tbody');
-    var items = getItems();
+    var items = await getItems();
     tableBody.innerHTML = '';
 
     for (var i = 0; i < items.length; i++) {
@@ -361,13 +517,16 @@ function renderAdminDashboard() {
     }
 }
 
-window.deleteAndRefresh = function (id) {
+window.deleteAndRefresh = async function (id) {
     if (confirm('Delete this item?')) {
-        deleteItem(id);
+        await deleteItem(id);
         renderAdminDashboard();
     }
 };
+
+// ============================================================
 // Admin Authentication Logic
+// ============================================================
 function checkAdminAuth() {
     var isLoggedIn = localStorage.getItem(AUTH_KEY) === 'true';
     var loginSection = document.getElementById('login-section');
