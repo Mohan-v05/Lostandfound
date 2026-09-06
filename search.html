@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Items | UWU FindIt</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="nav-container">
+            <a href="index.html" class="logo-text">
+            <div class="logo-text">
+            <span class="uva"><b>UVA </b></span>
+            <span class="findit"> FindIt</span>
+            </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="items.html">All Items</a></li>
+                <li><a href="search.html">Search</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="details.html">Details</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="section-title"><i class="fa fa-search"></i>  Search & Filter</h2>
+        <!-- Search Filters -->
+        <section
+            style="background: white; padding: 2rem; border-radius: 8px; box-shadow: var(--shadow); margin-bottom: 3rem;border: 2px solid black;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1.5rem; flex-wrap: wrap;">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label for="search-input">Item Name</label>
+                    <input type="text" id="search-input" placeholder="Search by item name or description...">
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label for="category-filter">Category</label>
+                    <select id="category-filter">
+                        <option value="">All Categories</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Documents">Documents/IDs</option>
+                        <option value="Personal">Personal Belongings</option>
+                        <option value="Books">Books/Stationery</option>
+                        <option value="Bags">Bags/Wallets</option>
+                        <option value="Clothing">Clothing/Accessories</option>
+                        <option value="Keys">Keys</option>
+                        <option value="Id card">ID Card</option>
+                        <option value="Umbrella">Umbrella</option>
+                        <option value="Buds/Airpods">Buds/Airpods</option>
+                        <option value="Charger">Charger</option>
+                        <option value="Phone">Phone</option>
+                        <option value="Laptop/Tablet">Laptop/Tablet</option>
+                        <option value="Headphones">Headphones</option>
+                        <option value="Power Bank">Power Bank</option>
+                        <option value="Multi plug">Multi Plug</option>
+                        <option value="Calculator">Calculator</option>
+                        <option value="Watch">Watch</option>
+                        <option value="Jewellery">Jewellery</option>
+                        <option value="Glasses">Glasses</option>
+                        <option value="Waterbottle">Waterbottle</option>
+                        <option value="Sports equipment">Sports equipment</option>
+                        <option value="Musical instruments">Musical instruments</option>
+                        <option value="Shoes">Shoes</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label for="location-filter">Campus Location</label>
+                    <select id="location-filter">
+                        <option value="">All Locations</option>
+                        <option value="">Select Location</option>
+                        <option value="Main Library">Main Library</option>
+                        <option value="MLT Hall">MLT Hall</option>
+                        <option value="A block">A block</option>
+                        <option value="B block">B block</option>
+                        <option value="C block">C block</option>
+                        <option value="D block">D block</option>
+                        <option value="E block">E block</option>
+                        <option value="F block">F block</option>
+                        <option value="G block">G block</option>
+                        <option value="Samaya Canteen Area">Samaya Canteen Area</option>
+                        <option value="Gallery Canteen Area">Gallery Canteen Area</option>
+                        <option value="G Canteen Area">G Canteen Area</option>
+                        <option value="Bus Stop">Bus Stop</option>
+                        <option value="Parking Area">Parking Area</option>
+                        <option value="Main Computer Lab">Main Computer Lab</option>
+                        <option value="E3 computer lab">E3 computer lab</option>
+                        <option value="Play ground pavilion">Play ground pavilion</option>
+                        <option value="Blue Shapphire Hostel Area">Blue Shapphire Hostel Area</option>
+                        <option value="Administration Building">Administration Building</option>
+                        <option value="Gym">Playground/Gym</option>
+                        <option value="Medical center">Medical center</option>
+                        <option value="Student union">Student union</option>
+                        <option value="Administrative Building">Administrative Building</option>
+                        <option value="Technology Auditorium">Auditorium</option>
+                        <option value="Namunukula Open Air Theater">Namunukula Open Air Theater</option>
+                        <option value="BOC Atm">BOC Atm</option>
+                        <option value="Workshop building">Workshop building</option>
+                        <option value="UWU livestock farm">Main Computer Lab</option>
+                        <option value="Maintainance division">Maintainance division</option>
+                        <option value="Senate Building">Senate Building</option>
+                        <option value="Basket ball court">Basket ball court</option>
+                        <option value="Lifting room UWU">Lifting room UWU</option>
+                        <option value="Gymnasium - uva Wellasa University">Gymnasium - uva Wellasa University</option>
+                        <option value="Anatomy Laboratory">Anatomy Laboratory</option>
+
+                        
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #777;"><i class="fas fa-info-circle"></i> Results
+                update in real-time as you type or change filters.</p>
+        </section>
+
+        <!-- Results Section -->
+        <section>
+            <div id="search-results" class="items-grid">
+                <!-- Dynamically populated by script.js -->
+                <p style="text-align: center; grid-column: 1/-1;">Start searching to see results.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Uva Wellassa University. Developed for CST Web Programming Project.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

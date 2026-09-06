@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Reported Items | UVA FindIt</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="nav-container">
+            <a href="index.html" class="logo-text">
+            <div class="logo-text">
+            <span class="uva"><b>UVA </b></span>
+            <span class="findit"> FindIt</span>
+            </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="items.html" class="active">All Items</a></li>
+                <li><a href="search.html">Search</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2 class="section-title">All Reported Items</h2>
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+                <p style="color: #666;">Showing all lost and found items submitted by the UWU community.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="lost.html" class="btn btn-primary btn-sm"
+                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">Report Lost</a>
+                    <a href="found.html" class="btn btn-secondary btn-sm"
+                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">Report Found</a>
+                </div>
+            </div>
+
+            <div id="all-items-container" class="items-grid">
+                <!-- Dynamically populated by script.js -->
+                <p style="text-align: center; grid-column: 1/-1;">Loading items...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; uva Wellassa University of Srilanka. Developed for CST Web Programming Project.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

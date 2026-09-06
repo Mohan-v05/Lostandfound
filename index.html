@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UVA FindIt – Lost & Found Platform | Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="nav-container">
+            <a href="index.html" class="logo-text">
+            <div class="logo-text">
+            <span class="uva"><b>UVA </b></span>
+            <span class="findit"> FindIt</span>
+            </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="items.html">All Items</a></li>
+                <li><a href="search.html">Search</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="details.html">Details</a></li>
+            </ul>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" style="background: linear-gradient(rgb(0, 0, 0), rgba(0,51,102,0.85)), no-repeat center center/cover; padding: 5rem 2rem; border-radius: 12px; color: white; text-align: center; margin-bottom: 4rem;">
+           <div class="pro-gradient-text"> <h1 style="font-size: 3rem; margin-bottom: 1rem; color: var(--accent-color);">UVA FindIt</h1></div>
+            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 2rem;">Official Lost & Found Management System for Uva Wellassa University of Sri Lanka. Recover your belongings and help fellow students by reporting items found on campus.</p>
+            <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                <a href="lost.html" class="btn btn-accent" style="padding: 1rem 2rem; font-size: 1.1rem;"><i class="fas fa-search-minus"></i> I Lost Something</a>
+                <a href="found.html" class="btn btn-secondary" style="padding: 1rem 2rem; font-size: 1.1rem;"><i class="fas fa-plus-circle"></i> I Found Something</a>
+            </div>
+        </section>
+
+        
+            <div class="border-box" style="text-align: center;">
+                 <a href="items.html">
+                  <center>   <img src="assets/lost and found.jpg" 
+                                alt="Lost and Found" 
+                                     class="animated-img">
+              </center>  </a>
+            </div>
+            
+        <!-- Stats / Features -->
+        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+            <div style="background: rgba(209, 191, 191, 0.667); padding: 2rem; border-radius: 8px; text-align: center; box-shadow: var(--shadow);">
+                <i class="fas fa-university" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                <h3>Campus Wide</h3>
+                <p>Covers all university departments, hostels, and recreational areas.</p>
+            </div>
+            <div style="background: rgba(209, 191, 191, 0.667); padding: 2rem; border-radius: 8px; text-align: center; box-shadow: var(--shadow);">
+                <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 1rem;"></i>
+                <h3>Secure Recovery</h3>
+                <p>Verified contact details to ensure items reach their rightful owners.</p>
+            </div>
+            <div style="background: rgba(209, 191, 191, 0.667); padding: 2rem; border-radius: 8px; text-align: center; box-shadow: var(--shadow);">
+                <i class="fas fa-bolt" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                <h3>Quick Alerts</h3>
+                <p>Real-time updates as soon as a new lost or found item is reported.</p>
+            </div>
+        </section>
+
+        <h1 class="section-title">Examples of Lost Items</h1>
+
+        <center>
+
+        <img src="assets/Waterbottle.webp" alt= "Water bottle" class="round-image">
+        <img src="assets/umbrella 02.webp" alt= "Umbrella" class="round-image">
+        <img src="assets/wallet.jpg" alt= "Wallet" class="round-image">
+        <img src="assets/buds.webp" alt= "Buds" class="round-image">
+        <img src="assets/backpack 01.jpg" value="Bags"alt= "Backpack" class="round-image">
+
+
+        </center>
+        <br>
+        <br>
+
+
+
+        <!-- Recent Items Section -->
+        <section>
+            <h3 class="section-title">Recently Reported</h3>
+            <div id="recent-items-container" class="items-grid">
+                <!-- Dynamically populated by script.js -->
+                 <p style="text-align: center; grid-column: 1/-1;">Loading recently reported items...</p>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="items.html" class="btn btn-primary">View All Items</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>UVA FindIt</h4>
+                <p>Uva Wellassa University of Sri Lanka's centralized platform for lost and recovered item management.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="items.html">All Items</a></li>
+                    <li><a href="lost.html">Report Lost</a></li>
+                    <li><a href="found.html">Report Found</a></li>
+                    <li><a href="admin.html">Admin Portal</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="about.html">How it works</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; uva Wellassa University of Srilanka. Developed for CST Web Programming Project.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

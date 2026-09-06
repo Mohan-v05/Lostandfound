@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | UVA FindIt</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="nav-container">
+            <a href="index.html" class="logo-text">
+                <div class="logo-text">
+                    <span class="uva"><b>UVA </b></span>
+                    <span class="findit"> FindIt</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="items.html">All Items</a></li>
+                <li><a href="search.html">Search</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin.html" class="active">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Login Section -->
+        <section id="login-section"
+            style="max-width: 400px; margin: 4rem auto; padding: 2rem; background: white; border-radius: 8px; box-shadow: var(--shadow);">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Admin Login</h2>
+            <form id="admin-login-form">
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="username" style="display: block; margin-bottom: 0.5rem;">Username</label>
+                    <input type="text" id="username" name="username" required
+                        style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="password" style="display: block; margin-bottom: 0.5rem;">Password</label>
+                    <input type="password" id="password" name="password" required
+                        style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">Login</button>
+            </form>
+            <p id="login-error" style="color: red; margin-top: 1rem; text-align: center; display: none;">Invalid
+                username or password.</p>
+        </section>
+
+        <!-- Admin Content (Hidden by default) -->
+        <section id="admin-content" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2 class="section-title" style="margin-bottom: 0;">Admin Dashboard</h2>
+                <button onclick="handleLogout()" class="btn btn-accent"><i class="fas fa-sign-out-alt"></i>
+                    Logout</button>
+            </div>
+
+            <div
+                style="background: #fff8e1; border-left: 5px solid var(--accent-color); padding: 1rem; margin-bottom: 2rem; border-radius: 4px;">
+                <p><strong><i class="fas fa-exclamation-triangle"></i> Administrative View:</strong> This interface
+                    allows you to manage all submitted entries.</p>
+            </div>
+
+            <div style="background: white; border-radius: 8px; box-shadow: var(--shadow); overflow-x: auto;">
+                <table id="admin-items-table" style="width: 100%; border-collapse: collapse; min-width: 800px;">
+                    <thead style="background-color: var(--primary-color); color: white;">
+                        <tr>
+                            <th style="padding: 1rem; text-align: left;">ID</th>
+                            <th style="padding: 1rem; text-align: left;">Item Name</th>
+                            <th style="padding: 1rem; text-align: left;">Status</th>
+                            <th style="padding: 1rem; text-align: left;">Category</th>
+                            <th style="padding: 1rem; text-align: left;">Location</th>
+                            <th style="padding: 1rem; text-align: left;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dynamically populated by script.js -->
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 2rem;">Loading data...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; uva Wellassa University of Srilanka. Developed for CST Web Programming Project.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

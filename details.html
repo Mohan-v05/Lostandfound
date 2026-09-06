@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Details | UVA FindIt</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="nav-container">
+            <a href="index.html" class="logo-text">
+            <div class="logo-text">
+            <span class="uva"><b>UVA </b></span>
+            <span class="findit"> FindIt</span>
+            </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="items.html">All Items</a></li>
+                <li><a href="search.html">Search</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Item Details Container (shown when ID is in URL) -->
+        <section id="item-details-container">
+            <!-- Dynamically populated by script.js based on URL parameter ?id=... -->
+            <div style="text-align: center; padding: 5rem;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: var(--primary-color);"></i>
+                <p style="margin-top: 1rem;">Loading item details...</p>
+            </div>
+        </section>
+
+        <!-- Beginner Tutorial Section (shown when no ID in URL) -->
+        <section id="about-platform-section" style="padding: 2rem 0;">
+            
+            <!-- Welcome Banner -->
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 4rem 2rem; border-radius: 12px; text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Welcome to UVA FindIt! 👋</h2>
+                <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Learn how to use the Item Details page to find your lost items or help return found items to their owners.</p>
+            </div>
+
+            <!-- Quick Overview -->
+            <div style="background: white; padding: 3rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 3rem;">
+                <h3 style="color: #667eea; font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center;">
+                    <i class="fas fa-lightbulb" style="margin-right: 0.5rem;"></i>What is the Item Details Page?
+                </h3>
+                <p style="font-size: 1.05rem; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto;">
+                    The Item Details page shows complete information about a specific lost or found item. When you click on any item from the main list, you'll see all its details including a photo, description, location, contact information, and more. It's your one-stop place to get all the information you need about an item!
+                </p>
+            </div>
+
+            <!-- Step-by-Step Tutorial -->
+            <div style="margin-bottom: 3rem;">
+                <h2 style="color: #333; text-align: center; font-size: 2rem; margin-bottom: 2.5rem;">
+                    <i class="fas fa-tasks" style="color: #667eea; margin-right: 0.5rem;"></i>How to Use This Page - Step by Step
+                </h2>
+
+                <!-- Step 1 -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; margin-bottom: 3rem; background: #f8f9ff; padding: 2.5rem; border-radius: 12px; border-left: 5px solid #667eea;">
+                    <div>
+                        <div style="background: #667eea; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">1</div>
+                        <h3 style="color: #333; font-size: 1.5rem; margin-bottom: 0.8rem;">Go to Items List</h3>
+                        <p style="color: #555; font-size: 1rem; line-height: 1.6;">
+                            First, visit the <strong>"All Items"</strong> page from the navigation menu. You'll see a grid of all lost and found items on campus.
+                        </p>
+                        <p style="color: #667eea; margin-top: 1rem; font-weight: bold;">💡 Tip: You can browse by category or use filters to find what you're looking for!</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <i class="fas fa-list" style="font-size: 4rem; color: #667eea; opacity: 0.2;"></i>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; margin-bottom: 3rem; background: #f0f8ff; padding: 2.5rem; border-radius: 12px; border-left: 5px solid #764ba2;">
+                    <div style="order: 2;">
+                        <div style="background: #764ba2; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">2</div>
+                        <h3 style="color: #333; font-size: 1.5rem; margin-bottom: 0.8rem;">Click on an Item Card</h3>
+                        <p style="color: #555; font-size: 1rem; line-height: 1.6;">
+                            Find an item you're interested in and <strong>click on its card</strong>. This will take you to the detailed page with all the information about that specific item.
+                        </p>
+                        <p style="color: #764ba2; margin-top: 1rem; font-weight: bold;">💡 Tip: Look at the status badge - it shows if item is "Lost" or "Found"!</p>
+                    </div>
+                    <div style="text-align: center; order: 1;">
+                        <i class="fas fa-hand-pointer" style="font-size: 4rem; color: #764ba2; opacity: 0.2;"></i>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; margin-bottom: 3rem; background: #f8f9ff; padding: 2.5rem; border-radius: 12px; border-left: 5px solid #667eea;">
+                    <div>
+                        <div style="background: #667eea; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">3</div>
+                        <h3 style="color: #333; font-size: 1.5rem; margin-bottom: 0.8rem;">Review the Item Details</h3>
+                        <p style="color: #555; font-size: 1rem; line-height: 1.6;">
+                            Now you'll see the complete item information including:
+                        </p>
+                        <ul style="color: #555; margin-top: 1rem; padding-left: 1.5rem; font-size: 0.95rem;">
+                            <li><strong>Item Photo/Image</strong> - Visual of the item</li>
+                            <li><strong>Item Name</strong> - What is it?</li>
+                            <li><strong>Category</strong> - Type (Electronics, Documents, etc.)</li>
+                            <li><strong>Location</strong> - Where it was lost/found</li>
+                            <li><strong>Date</strong> - When it was reported</li>
+                            <li><strong>Description</strong> - Details about the item</li>
+                        </ul>
+                    </div>
+                    <div style="text-align: center;">
+                        <i class="fas fa-info-circle" style="font-size: 4rem; color: #667eea; opacity: 0.2;"></i>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; margin-bottom: 3rem; background: #f0f8ff; padding: 2.5rem; border-radius: 12px; border-left: 5px solid #764ba2;">
+                    <div style="order: 2;">
+                        <div style="background: #764ba2; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">4</div>
+                        <h3 style="color: #333; font-size: 1.5rem; margin-bottom: 0.8rem;">Contact the Owner</h3>
+                        <p style="color: #555; font-size: 1rem; line-height: 1.6;">
+                            You'll find the <strong>contact number</strong> on the details page. If you found a matching item or recognize your lost item, you can call or text the person using this number.
+                        </p>
+                        <p style="color: #764ba2; margin-top: 1rem; font-weight: bold;">💡 Tip: Be polite and clear when describing why you're contacting them!</p>
+                    </div>
+                    <div style="text-align: center; order: 1;">
+                        <i class="fas fa-phone" style="font-size: 4rem; color: #764ba2; opacity: 0.2;"></i>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; margin-bottom: 3rem; background: #f8f9ff; padding: 2.5rem; border-radius: 12px; border-left: 5px solid #667eea;">
+                    <div>
+                        <div style="background: #667eea; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">5</div>
+                        <h3 style="color: #333; font-size: 1.5rem; margin-bottom: 0.8rem;">Mark Item as Recovered (Optional)</h3>
+                        <p style="color: #555; font-size: 1rem; line-height: 1.6;">
+                            If you've successfully recovered the item, you can upload a <strong>recovery proof image</strong> and mark it as recovered. This helps confirm the item has been reunited!
+                        </p>
+                        <p style="color: #667eea; margin-top: 1rem; font-weight: bold;">💡 Tip: Take a photo of you with the item for proof!</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <i class="fas fa-camera" style="font-size: 4rem; color: #667eea; opacity: 0.2;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Important Information Box -->
+            <div style="background: #fff3cd; border: 2px solid #ffc107; padding: 2rem; border-radius: 12px; margin-bottom: 3rem;">
+                <h3 style="color: #856404; margin-bottom: 1rem; font-size: 1.3rem;">
+                    <i class="fas fa-exclamation-triangle" style="margin-right: 0.5rem;"></i>Important Information
+                </h3>
+                <ul style="color: #856404; padding-left: 1.5rem; line-height: 1.8;">
+                    <li><strong>Privacy First:</strong> Never share personal information on public posts. Contact the person privately.</li>
+                    <li><strong>Be Honest:</strong> Only report items you genuinely lost or found. False reports can be misleading.</li>
+                    <li><strong>Be Respectful:</strong> When contacting someone, be polite and professional.</li>
+                    <li><strong>Safety:</strong> Meet in public places and bring a friend when recovering items.</li>
+                    <li><strong>Proof of Ownership:</strong> Be prepared to describe specific details of the item to prove it's yours.</li>
+                </ul>
+            </div>
+
+            <!-- Quick Reference Card -->
+            <div style="background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <h3 style="color: #667eea; text-align: center; font-size: 1.5rem; margin-bottom: 2rem;">
+                    <i class="fas fa-bookmark"></i> Quick Reference - What You'll See on This Page
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
+                    <div style="border: 2px solid #667eea; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                        <i class="fas fa-image" style="font-size: 2rem; color: #667eea; margin-bottom: 0.5rem;"></i>
+                        <h4 style="color: #333; margin-bottom: 0.5rem;">Item Image</h4>
+                        <p style="color: #666; font-size: 0.9rem;">Photo or picture of the item</p>
+                    </div>
+                    <div style="border: 2px solid #667eea; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                        <i class="fas fa-tag" style="font-size: 2rem; color: #667eea; margin-bottom: 0.5rem;"></i>
+                        <h4 style="color: #333; margin-bottom: 0.5rem;">Item Details</h4>
+                        <p style="color: #666; font-size: 0.9rem;">Name, category, description</p>
+                    </div>
+                    <div style="border: 2px solid #667eea; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                        <i class="fas fa-map-marker-alt" style="font-size: 2rem; color: #667eea; margin-bottom: 0.5rem;"></i>
+                        <h4 style="color: #333; margin-bottom: 0.5rem;">Location</h4>
+                        <p style="color: #666; font-size: 0.9rem;">Where it was found/lost</p>
+                    </div>
+                    <div style="border: 2px solid #667eea; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                        <i class="fas fa-calendar" style="font-size: 2rem; color: #667eea; margin-bottom: 0.5rem;"></i>
+                        <h4 style="color: #333; margin-bottom: 0.5rem;">Date</h4>
+                        <p style="color: #666; font-size: 0.9rem;">When it was reported</p>
+                    </div>
+                    <div style="border: 2px solid #667eea; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                        <i class="fas fa-phone" style="font-size: 2rem; color: #667eea; margin-bottom: 0.5rem;"></i>
+                        <h4 style="color: #333; margin-bottom: 0.5rem;">Contact Info</h4>
+                        <p style="color: #666; font-size: 0.9rem;">How to reach the reporter</p>
+                    </div>
+                    <div style="border: 2px solid #667eea; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                        <i class="fas fa-check-circle" style="font-size: 2rem; color: #667eea; margin-bottom: 0.5rem;"></i>
+                        <h4 style="color: #333; margin-bottom: 0.5rem;">Status</h4>
+                        <p style="color: #666; font-size: 0.9rem;">Lost, Found, or Recovered</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 3rem 2rem; border-radius: 12px; text-align: center; margin-top: 3rem;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Ready to Find Your Item?</h3>
+                <p style="font-size: 1.05rem; margin-bottom: 1.5rem;">Go to the All Items page and start browsing lost and found items now!</p>
+                <a href="items.html" style="display: inline-block; background: white; color: #667eea; padding: 0.8rem 2rem; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 1.05rem; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <i class="fas fa-arrow-right" style="margin-right: 0.5rem;"></i>Browse All Items
+                </a>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; uva Wellassa University of Srilanka. Developed for CST Web Programming Project.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Control visibility based on URL parameters
+        window.addEventListener('DOMContentLoaded', function() {
+            var params = new URLSearchParams(window.location.search);
+            var id = params.get('id');
+            
+            var itemDetailsContainer = document.getElementById('item-details-container');
+            var aboutSection = document.getElementById('about-platform-section');
+            
+            if (id) {
+                // If ID exists in URL, show item details, hide about section
+                itemDetailsContainer.style.display = 'block';
+                aboutSection.style.display = 'none';
+            } else {
+                // If no ID, show about section, hide item details
+                itemDetailsContainer.style.display = 'none';
+                aboutSection.style.display = 'block';
+            }
+        });
+    </script>

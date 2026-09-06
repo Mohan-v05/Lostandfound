@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | UVA FindIt</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="nav-container">
+            <a href="index.html" class="logo-text">
+            <div class="logo-text">
+            <span class="uva"><b>UVA </b></span>
+            <span class="findit"> FindIt</span>
+            </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="items.html">All Items</a></li>
+                <li><a href="search.html">Search</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="details.html">Details</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="section-title">Contact Support</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+            <!-- Contact Form -->
+            <div class="form-container" style="margin: 0; max-width: none;">
+                <h3>Send us a Message</h3>
+                <p style="margin-bottom: 1.5rem; color: #666;">If you have any technical issues or general inquiries,
+                    please fill out the form below.</p>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input style="border: 1px solid #000000;" type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">University Email</label>
+                        <input  style="border: 1px solid #000000;" type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea   style="border: 1px solid #000000;"id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+
+            <!-- University Info -->
+            <div style="background: #ffffff; padding: 2.5rem; border-radius: 8px;border: 3px solid #000000; box-shadow: var(--shadow);">
+                <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;" >University Contact Info</h3>
+
+                <div style="margin-bottom: 2rem;">
+                    <p style="font-weight: 700; color: var(--primary-color);"><i class="fas fa-map-marker-alt"
+                            style="width: 25px;"></i> Address</p>
+                    <p>Uva Wellassa University,<br>Passara Road, Badulla,<br>Sri Lanka.</p>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <p style="font-weight: 700; color: var(--primary-color);"><i class="fas fa-phone"
+                            style="width: 25px;"></i> Phone</p>
+                    <p>+94 55 222 6622</p>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <p style="font-weight: 700; color: var(--primary-color);"><i class="fas fa-envelope"
+                            style="width: 25px;"></i> Email</p>
+                    <p>info@uwu.ac.lk</p>
+                    <p>support.findit@uwu.ac.lk</p>
+                </div>
+
+                <div>
+                    <p style="font-weight: 700; color: var(--primary-color); margin-bottom: 1rem;">Connect with UWU</p>
+                    <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
+                        <a href="#" style="color: #3b5998;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #00acee;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #0077b5;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: #c4302b;"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; uva Wellassa University of Srilanka. Developed for CST Web Programming Project.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
